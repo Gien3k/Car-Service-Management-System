@@ -1,0 +1,10 @@
+CREATE OR REPLACE TRIGGER trg_supply_order_details_bi
+BEFORE INSERT ON SUPPLY_ORDER_DETAILS
+FOR EACH ROW
+BEGIN
+    IF :NEW.DETAIL_ID IS NULL THEN
+        SELECT seq_supply_order_details.NEXTVAL INTO :NEW.DETAIL_ID FROM DUAL;
+    END IF;
+END;
+/
+ALTER TRIGGER trg_supply_order_details_bi ENABLE;
